@@ -1,7 +1,6 @@
 <script lang="ts">
   import Plugin from "./lib/components/plugin.svelte";
-import Plugingate from "./lib/components/plugingate.svelte";
-
+  import Plugingate from "./lib/components/plugingate.svelte";
 </script>
 
 <main>
