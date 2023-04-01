@@ -1,0 +1,14 @@
+{
+  "name": "Jack's DM Tools",
+  "version": "0.1.0",
+  "manifest_version": 1,
+  "author": "Jackson Toomey",
+  "description": "Tools for DMs",
+  "action": {
+    "title": "Dm Tools",
+    "icon": "/fight.svg",
+    "popover": "/",
+    "height": 200,
+    "width": 200
+  }
+}
