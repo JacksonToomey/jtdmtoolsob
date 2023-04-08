@@ -9,6 +9,7 @@
   import Gminitiativecount from "./gminitiativecount.svelte";
   import Tokenname from "./tokenname.svelte";
   import { METADATA_KEY } from "../constants";
+  import Damagelist from "./damagelist.svelte";
 
   export let token: Token;
   export let index: number;
@@ -63,6 +64,7 @@
       />
     </div>
     {#if !isPlayer}
+      <Damagelist {token} />
       <table class="table table-compact w-full table-fixed">
         <thead>
           <tr>

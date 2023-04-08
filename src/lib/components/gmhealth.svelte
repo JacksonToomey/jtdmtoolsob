@@ -2,6 +2,7 @@
   import { getMetadata, updateMeta, type Token } from "../stores/tokens";
   let totalDamage = 0;
   let percent = 0.0;
+  let currentHP = 0;
   $: {
     const damageList = getMetadata(token)?.damage || [];
     totalDamage = damageList.reduce((acc, val) => {
@@ -16,6 +17,10 @@
       percent = (totalDamage / hp) * 100;
     }
   }
+  $: {
+    const hp = getMetadata(token)?.hp || 0;
+    currentHP = hp - totalDamage;
+  }
   export let token: Token;
   const handleChange = (evt: Event) => {
     const newHP = parseInt((evt.target as HTMLInputElement).value, 10);
@@ -25,7 +30,7 @@
 </script>
 
 <div>
-  {totalDamage} /
+  {currentHP} /
   <input
     class="input input-primary input-xs w-12"
     value={getMetadata(token)?.hp || 0}
