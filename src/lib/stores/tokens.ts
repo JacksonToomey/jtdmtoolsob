@@ -1,4 +1,5 @@
 import type { Image, Item } from "@owlbear-rodeo/sdk";
+import OBR from "@owlbear-rodeo/sdk";
 import { derived, writable } from "svelte/store";
 import { METADATA_KEY } from "../constants";
 
@@ -44,3 +45,18 @@ export const orderedTokens = derived(tokens, ($tokens) =>
     return (bmeta.initiativeCount || 0) - (ameta.initiativeCount || 0);
   })
 );
+
+export const updateMeta = (token: Token, changes: Partial<TokenMeta>) => {
+  OBR.scene.items.updateItems([token.id], (items) => {
+    if (items.length < 1) return;
+    const item = items[0];
+    const tokenMeta = getMetadata(item);
+    item.metadata = {
+      ...item.metadata,
+      [METADATA_KEY]: {
+        ...tokenMeta,
+        ...changes,
+      },
+    };
+  });
+};
