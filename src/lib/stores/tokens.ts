@@ -10,6 +10,7 @@ export type TokenMeta = {
   ac?: number;
   initiativeCount?: number;
   damage: number[];
+  player?: boolean;
 };
 
 export const getMetadata: (item: Item) => TokenMeta | undefined = (

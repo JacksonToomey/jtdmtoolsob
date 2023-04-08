@@ -5,12 +5,12 @@
 
   const handleCombatToggle = () => {
     const inCombat = !Boolean($scene?.inCombat);
-
     OBR.scene.setMetadata({
       [SCENE_METADATA_KEY]: {
         ...$scene,
         inCombat,
         rounds: 1,
+        currentInitiative: 0,
       },
     });
   };
