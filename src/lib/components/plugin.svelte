@@ -14,6 +14,7 @@
   import Player from "./player.svelte";
   import Gm from "./gm.svelte";
   import { scene } from "../stores/scene";
+  import Controls from "./controls.svelte";
 
   const filterToken = (item: Item) =>
     item.layer === "CHARACTER" && isImage(item);
@@ -44,7 +45,9 @@
 </script>
 
 <main class="p-2">
-  {JSON.stringify($scene)}
+  {#if $playerType === "GM"}
+    <Controls />
+  {/if}
   {#if $playerType === "PLAYER"}
     <Player />
   {:else}

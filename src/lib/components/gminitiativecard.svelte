@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { scene } from "../stores/scene";
   import type { Token } from "../stores/tokens";
   import Gmac from "./gmac.svelte";
   import Gmdamage from "./gmdamage.svelte";
@@ -7,9 +8,27 @@
   import Tokenname from "./tokenname.svelte";
 
   export let token: Token;
+  export let index: number;
+  let ref: HTMLElement;
+  let current = false;
+  $: {
+    current = $scene?.currentInitiative === index;
+  }
+  $: {
+    if (current) {
+      if (ref) {
+        ref.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }
 </script>
 
-<div class="card mb-2" class:bg-neutral={true} class:bg-primary={false}>
+<div
+  bind:this={ref}
+  class="card mb-2"
+  class:bg-neutral={true}
+  class:bg-primary={false}
+>
   <div class="card-body p-2">
     <div class="card-title justify-between">
       <Gminitiativecount {token} />
