@@ -13,6 +13,7 @@
   import { initialize } from "../contextMenu";
   import Player from "./player.svelte";
   import Gm from "./gm.svelte";
+  import { scene } from "../stores/scene";
 
   const filterToken = (item: Item) =>
     item.layer === "CHARACTER" && isImage(item);
@@ -43,16 +44,10 @@
 </script>
 
 <main class="p-2">
-  {#each $orderedTokens as token, i (token.id)}
-    <div class="py-4 flex flex-row items-center w-full px-2">
-      {#if $playerType === "PLAYER"}
-        <Player />
-      {:else}
-        <Gm {token} />
-      {/if}
-    </div>
-    {#if i < $orderedTokens.length - 1}
-      <div class="divider p-0 m-0" />
-    {/if}
-  {/each}
+  {JSON.stringify($scene)}
+  {#if $playerType === "PLAYER"}
+    <Player />
+  {:else}
+    <Gm />
+  {/if}
 </main>
