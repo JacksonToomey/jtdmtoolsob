@@ -1,7 +1,12 @@
 <script lang="ts">
   import OBR from "@owlbear-rodeo/sdk";
   import { scene, SCENE_METADATA_KEY } from "../stores/scene";
-  import { orderedTokens } from "../stores/tokens";
+  import {
+    orderedTokens,
+    setMetaData,
+    updateMeta,
+    type Token,
+  } from "../stores/tokens";
 
   const handleCombatToggle = () => {
     const inCombat = !Boolean($scene?.inCombat);
@@ -12,6 +17,13 @@
         rounds: 1,
         currentInitiative: 0,
       },
+    });
+    if (inCombat) return;
+    const ids = $orderedTokens.map((ot) => ot.id);
+    OBR.scene.items.updateItems(ids, (items) => {
+      for (let item of items) {
+        setMetaData(item as Token, { initiativeCount: 0 });
+      }
     });
   };
 

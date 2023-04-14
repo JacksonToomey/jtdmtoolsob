@@ -50,13 +50,17 @@ export const updateMeta = (token: Token, changes: Partial<TokenMeta>) => {
   OBR.scene.items.updateItems([token.id], (items) => {
     if (items.length < 1) return;
     const item = items[0];
-    const tokenMeta = getMetadata(item);
-    item.metadata = {
-      ...item.metadata,
-      [METADATA_KEY]: {
-        ...tokenMeta,
-        ...changes,
-      },
-    };
+    setMetaData(item as Token, changes);
   });
+};
+
+export const setMetaData = (item: Token, changes: Partial<TokenMeta>) => {
+  const tokenMeta = getMetadata(item);
+  item.metadata = {
+    ...item.metadata,
+    [METADATA_KEY]: {
+      ...tokenMeta,
+      ...changes,
+    },
+  };
 };
