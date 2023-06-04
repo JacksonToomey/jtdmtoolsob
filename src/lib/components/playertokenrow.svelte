@@ -5,11 +5,10 @@
   import Tokenstatus from "./tokenstatus.svelte";
 
   export let token: Token;
-  export let index: number;
   let ref: HTMLElement;
   let active = false;
   $: {
-    active = $scene.currentInitiative === index;
+    active = $scene.currentInitiativeToken === token.id;
     if (active && ref) {
       ref.scrollIntoView();
     }

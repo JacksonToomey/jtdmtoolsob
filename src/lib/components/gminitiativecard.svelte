@@ -12,7 +12,6 @@
   import Damagelist from "./damagelist.svelte";
 
   export let token: Token;
-  export let index: number;
   let ref: HTMLElement;
   let current = false;
   let isPlayer = false;
@@ -20,7 +19,7 @@
     isPlayer = Boolean(getMetadata(token)?.player);
   }
   $: {
-    current = $scene?.currentInitiative === index && $scene?.inCombat;
+    current = $scene?.currentInitiativeToken === token.id && $scene?.inCombat;
   }
   $: {
     if (current) {

@@ -17,8 +17,8 @@
         </tr>
       </thead>
       <tbody>
-        {#each $orderedTokens as token, index (token.id)}
-          <Playertokenrow {token} {index} />
+        {#each $orderedTokens as token (token.id)}
+          <Playertokenrow {token} />
         {/each}
       </tbody>
     </table>

@@ -7,7 +7,7 @@ export const SCENE_METADATA_KEY = `${ID}/scenemetadata`;
 
 export interface SceneMetadata {
   inCombat?: boolean;
-  currentInitiative?: number;
+  currentInitiativeToken?: string;
   rounds?: number;
 }
 

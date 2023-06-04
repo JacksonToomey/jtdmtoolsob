@@ -15,7 +15,7 @@
         ...$scene,
         inCombat,
         rounds: 1,
-        currentInitiative: 0,
+        currentInitiativeToken: $orderedTokens[0].id,
       },
     });
     if (inCombat) return;
@@ -28,7 +28,8 @@
   };
 
   const handleNext = () => {
-    let currentLocation = $scene.currentInitiative;
+    let currentId = $scene.currentInitiativeToken;
+    let currentLocation = $orderedTokens.findIndex((v) => v.id === currentId);
     if (currentLocation === null || currentLocation === undefined) {
       currentLocation = -1;
     }
@@ -40,10 +41,11 @@
       rounds = rounds + 1;
     }
     const newLocation = (currentLocation + 1) % $orderedTokens.length;
+    const newId = $orderedTokens[newLocation].id;
     OBR.scene.setMetadata({
       [SCENE_METADATA_KEY]: {
         ...$scene,
-        currentInitiative: newLocation,
+        currentInitiativeToken: newId,
         rounds,
       },
     });
