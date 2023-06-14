@@ -3,6 +3,6 @@
   import Gminitiativecard from "./gminitiativecard.svelte";
 </script>
 
-{#each $orderedTokens as token, index (token.id)}
-  <Gminitiativecard {token} {index} />
+{#each $orderedTokens as token (token.id)}
+  <Gminitiativecard {token} />
 {/each}

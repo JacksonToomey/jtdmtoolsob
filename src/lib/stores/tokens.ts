@@ -46,6 +46,14 @@ export const orderedTokens = derived(tokens, ($tokens) =>
   })
 );
 
+export const updateTokenName = (token: Token, name: string) => {
+  OBR.scene.items.updateItems([token.id], (items) => {
+    if (items.length < 1) return;
+    const item = items[0] as Token;
+    item.text.plainText = name;
+  });
+};
+
 export const updateMeta = (token: Token, changes: Partial<TokenMeta>) => {
   OBR.scene.items.updateItems([token.id], (items) => {
     if (items.length < 1) return;
