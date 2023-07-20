@@ -24,6 +24,7 @@
   let unsubItemsChange = () => {};
   let unSubScene = () => {};
   onMount(async () => {
+    console.log("mounted?");
     const items = await OBR.scene.items.getItems();
     tokens.set(items.filter(filterInitiative) as Token[]);
     unsubItemsChange = OBR.scene.items.onChange((items) => {
