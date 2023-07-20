@@ -11,6 +11,7 @@ const getDefaultMeta = () =>
   } as TokenMeta);
 
 export const initialize = () => {
+  console.log("JTDM: Initializing context menu");
   OBR.contextMenu.create({
     id: `${ID}/context-menu`,
     icons: [
