@@ -24,21 +24,24 @@
   let unsubItemsChange = () => {};
   let unSubScene = () => {};
   onMount(async () => {
-    console.log("mounted?");
-    console.log(OBR.scene);
-    const items = await OBR.scene.items.getItems();
-    tokens.set(items.filter(filterInitiative) as Token[]);
-    unsubItemsChange = OBR.scene.items.onChange((items) => {
+    try {
+      console.log("mounted?");
+      const items = await OBR.scene.items.getItems();
       tokens.set(items.filter(filterInitiative) as Token[]);
-    });
-    unSubScene = OBR.scene.onReadyChange(async (isReady) => {
-      if (isReady) {
-        const items = await OBR.scene.items.getItems();
+      unsubItemsChange = OBR.scene.items.onChange((items) => {
         tokens.set(items.filter(filterInitiative) as Token[]);
-      }
-    });
-    if ($playerType === "PLAYER") return;
-    initialize();
+      });
+      unSubScene = OBR.scene.onReadyChange(async (isReady) => {
+        if (isReady) {
+          const items = await OBR.scene.items.getItems();
+          tokens.set(items.filter(filterInitiative) as Token[]);
+        }
+      });
+      if ($playerType === "PLAYER") return;
+      initialize();
+    } catch (e) {
+      console.log("got it", e);
+    }
   });
   onDestroy(() => {
     unsubItemsChange();
