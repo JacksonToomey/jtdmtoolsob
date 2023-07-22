@@ -23,8 +23,18 @@
 
   let unsubItemsChange = () => {};
   let unSubScene = () => {};
+  const awaitSceneReady = () =>
+    new Promise<void>((resolve) => {
+      const interval = setInterval(async () => {
+        const isReady = await OBR.scene.isReady();
+        if (isReady) {
+          clearInterval(interval);
+          resolve();
+        }
+      }, 100);
+    });
   onMount(async () => {
-    console.log("mounted?", await OBR.scene.isReady());
+    await awaitSceneReady();
     const items = await OBR.scene.items.getItems();
     tokens.set(items.filter(filterInitiative) as Token[]);
     unsubItemsChange = OBR.scene.items.onChange((items) => {
